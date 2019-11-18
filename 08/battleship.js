@@ -106,7 +106,12 @@ var controller = {
 	guesses: 0,
 
 	processGuess: function(guess) {
-		var location = parseGuess(guess);
+		if (isNaN(guess)) {
+			var location = parseGuess(guess);
+		}else {
+			var location = guess;
+		}
+		//var location = parseGuess(guess);
 		if (location) {
 			this.guesses++;
 			var hit = model.fire(location);
@@ -145,6 +150,11 @@ function init() {
 	fireButton.onclick = handleFireButton;
 	var guessInput = document.getElementById("guessInput");
 	guessInput.onkeypress = handleKeyPress;
+	var tds = document.getElementsByTagName("td");
+	for (var i = 0; i < tds.length; i++) {
+		tds[i].onclick = handleClick;
+		// tds[i].ondoubleclick = handleDoubleClick;
+	}
 
 	model.generateShipLocations();
 }
@@ -162,6 +172,35 @@ function handleKeyPress(e) {
 		fireButton.onclick();
 		return false;
 	}
+}
+
+function handleClick(eventObj) {
+	var id = eventObj.target.id;
+	controller.processGuess(id);
+}
+
+/*
+function handleDoubleClick(eventObj) {
+	var target = eventObj.target;
+	var id = target.id;
+	console.log(id);
+	for (var i = 0; i < model.ships.length; i++) {
+		var ship = model.ships[i];
+		if (!ship.hits[i]) {
+			if (ship.locations.indexOf(id)) {
+				view.displayHit(id);
+				setTimeout(resetClass, 1000, target);
+			}else {
+				view.displayMiss(id);
+				setTimeout(resetClass, 1000, target);
+			}
+		}
+	}
+}
+*/
+
+function resetClass(target) {
+	target.class = "";
 } 
 
 window.onload = init;
