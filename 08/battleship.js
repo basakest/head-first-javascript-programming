@@ -119,6 +119,12 @@ var controller = {
 				view.displayMessage("You sank all my battleships in " + this.guesses + " guesses");
 				var form = document.getElementsByTagName("form")[0];
 				form.outerHTML = "";
+				// var table = document.getElementsByTagName("table")[0];
+				// table.outerHTML = "";
+				var tds = document.getElementsByTagName("td");
+				for (var i = 0; i < tds.length; i++) {
+					tds[i].onclick = null;
+				}
 			}
 		}
 	}
@@ -151,9 +157,13 @@ function init() {
 	var guessInput = document.getElementById("guessInput");
 	guessInput.onkeypress = handleKeyPress;
 	var tds = document.getElementsByTagName("td");
+	//var form = document.getElementsByTagName("form")[0];
 	for (var i = 0; i < tds.length; i++) {
-		tds[i].onclick = handleClick;
-		// tds[i].ondoubleclick = handleDoubleClick;
+		//if (document.getElementsByTagName("form")[0]) {
+			tds[i].onclick = handleClick;
+			// tds[i].ondoubleclick = handleDoubleClick;
+		//}
+		
 	}
 
 	model.generateShipLocations();
