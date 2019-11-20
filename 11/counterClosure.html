@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Counter closure</title>
+	</head>
+	<body>
+		<script>
+			function makeCounter() {
+				var count = 0;
+
+				function counter() {
+					return ++count;
+				}
+				return counter;
+			}
+
+			var doCount = makeCounter();
+			console.log(doCount());
+			console.log(doCount());
+			console.log(doCount());
+
+		</script>
+	</body>
+</html>
