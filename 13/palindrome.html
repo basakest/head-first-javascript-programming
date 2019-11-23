@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Palindrome</title>
+		<script>
+
+			String.prototype.Palindrome = function() {
+				var len = this.length - 1;
+				for (var i = 0; i < len / 2; i++) {
+					if (this.charAt(i) !== this.charAt(len - i)) {
+						return false;
+					}
+				}
+				return true;
+			};
+
+			//
+			// SUPER advanced way
+			//
+			String.prototype.PalindromeAdv = function() {
+				var r = this.split("").reverse().join("");
+				return (r === this.toString());
+			}
+
+			var phrases = ["eve",
+						   "layak",
+						   "mom",
+						   "wow",
+						   "noon",
+						   "Not a Palindrome"];
+
+			for (var i = 0; i < phrases.length; i++) {
+				var phrase = phrases[i];
+				//console.log(phrase.toString());
+				if (phrase.PalindromeAdv()) {
+					console.log("'" + phrase + "' is a Palindrome");
+				} else {
+					console.log("'" + phrase + "' is NOT a Palindrome");
+				}
+			}
+
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
